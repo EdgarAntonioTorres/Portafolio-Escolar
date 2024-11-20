@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.Scanner;
+public class Tareas 
+{
+     public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        //Declaración de variables
+        int multiplicando = 0;
+        int multiplicador = 0;
+        int producto = 0;
+        int contador;
+        //Pedir los números al usuario
+        System.out.println("Ingrese el primer número a multiplicar (multiplicando).");
+        multiplicando = scanner.nextInt();
+        System.out.println("Ingrese el segundo número a multiplicar (multiplicador).");
+        multiplicador = scanner.nextInt();
+        //Realizar la operación
+        contador = multiplicando;
+        while (contador > 0)
+        {
+            producto += multiplicando;
+            contador--;
+        }
+        //Mostrar el resultado
+        System.out.println("El resultado de " + multiplicando + " x " + multiplicador + " es: " + producto);
+    }
+}

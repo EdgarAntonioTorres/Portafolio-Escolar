@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.Scanner;
+public class Tareas 
+{
+     public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        //Declaración de variables
+        int dividendo = 0;
+        int divisor = 0;
+        int cociente = 0;
+        int contador;
+        //Pedir los números al usuario
+        System.out.println("Ingrese el primer número a dividir (dividendo).");
+        dividendo = scanner.nextInt();
+        System.out.println("Ingrese el segundo número a dividir (divisor).");
+        divisor = scanner.nextInt();
+        //Realizar la operación
+        contador = dividendo;
+        while (contador >= divisor)
+        {
+            contador -= divisor;
+            cociente++;
+        }
+        //Mostrar el resultado
+        System.out.println("El resultado de " + dividendo + " / " + divisor + " es: " + cociente);
+    }
+}

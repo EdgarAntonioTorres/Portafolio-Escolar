@@ -1,0 +1,170 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Cafetera {
+
+    // Capacidad máxima de ingredientes
+    private double cafeCapacidad = 2000;
+    private double aguaCapacidad = 3000;
+    private double azucarCapacidad = 2000;
+    private double cafeActual;
+    // Ingredientes actuales
+    private double aguaActual;
+    private double azucarActual;
+    //Registro de ventas
+    private double ventasTotales;
+    private int totalTazasVendidas;
+    private ArrayList<String> tazasVendidas;
+
+    //Constructor
+    public Cafetera() {
+        this.cafeCapacidad = cafeCapacidad;
+        this.aguaCapacidad = aguaCapacidad;
+        this.azucarCapacidad = azucarCapacidad;
+        this.cafeActual = 2000;
+        this.aguaActual = 3000;
+        this.azucarActual = 2000;
+        this.ventasTotales = 0;
+        this.totalTazasVendidas = 0;
+        this.tazasVendidas = new ArrayList<>();
+    }
+
+    //Método para servir café
+    public void servirCafe(char tipoTaza, boolean azucar) {
+        double cantidadCafe;
+        double cantidadAzucar;
+        double precioTaza;
+        String taza;
+
+        //Determinar cantidades según el tamaño
+        switch (tipoTaza) {
+            case 's':
+                cantidadCafe = 10;
+                precioTaza = azucar ? 14.5 : 10.5;
+                taza = "Chico";
+                break;
+            case 'm':
+                cantidadCafe = 15;
+                precioTaza = azucar ? 24.5 : 34.5;
+                taza = "Mediano";
+                break;
+            case 'b':
+                cantidadCafe = 25;
+                precioTaza = azucar ? 34.5 : 39.5;
+                taza = "Grande";
+                break;
+            default:
+                System.out.println("Tamaño inválido, intente de nuevo.");
+                return;
+        }
+
+        //Determinar cantidad de azúcar
+        cantidadAzucar = azucar ? 10 : 0;
+
+        //Verificar si hay suficientes ingredientes para servir el café
+        if (cafeActual >= cantidadCafe && azucarActual >= cantidadAzucar && aguaActual >= (cantidadCafe / 10)) {
+            //Actualizar ingredientes y registrar venta
+            cafeActual -= cantidadCafe;
+            azucarActual -= cantidadAzucar;
+            aguaActual -= (cantidadCafe / 10);
+            ventasTotales += precioTaza;
+            totalTazasVendidas++;
+            tazasVendidas.add(taza + " café" + (azucar ? " con azúcar" : "") + " $" + precioTaza);
+            System.out.println("Café servido: " + taza + " café " + (azucar ? "con azúcar" : "" + "$" + precioTaza));
+        } else {
+            System.out.println("Ingredientes insuficientes, no se puede servir.");
+        }
+    }
+    
+    //Método para calcular y devolver cambio
+    public void calcularCambio(double dineroPagado, double precioTaza) {
+        double cambio = dineroPagado - precioTaza;
+        if (cambio >= 0) {
+            System.out.println("Cambio: $" + cambio);
+            HashMap<Integer, Integer> monedas = new HashMap<>();
+            int[] denominaciones = {10, 5, 2, 1};
+            for (int denominacion : denominaciones) {
+                int cantidadMonedas = (int) (cambio / denominacion);
+                if (cantidadMonedas > 0) {
+                    monedas.put(denominacion, cantidadMonedas);
+                    cambio -= cantidadMonedas * denominacion;
+                }
+            }
+            System.out.println("Monedas a entregar como cambio:");
+            for (int denominacion : denominaciones) {
+                if (monedas.containsKey(denominacion)) {
+                    System.out.println("$" + denominacion + ": " + monedas.get(denominacion));
+                }
+            }
+        } else {
+            System.out.println("Dinero insuficiente para cubrir el costo de la taza.");
+        }
+    }
+
+    //Método para agregar café
+    public void agregarCafe(double cantidad) {
+        if (cafeActual + cantidad <= cafeCapacidad) {
+            cafeActual += cantidad;
+            System.out.println("Se agregaron " + cantidad + " gramos de café.");
+        } else {
+            System.out.println("Capacidad de café excedida. No se puede agregar más.");
+        }
+    }
+
+    //Método para agregar azúcar
+    public void agregarAzucar(double cantidad) {
+        if (azucarActual + cantidad <= azucarCapacidad) {
+            azucarActual += cantidad;
+            System.out.println("Se agregaron " + cantidad + " gramos de azúcar.");
+        } else {
+            System.out.println("Capacidad de azúcar excedida. No se puede agregar más.");
+        }
+    }
+
+    //Método para agregar agua
+    public void agregarAgua(double cantidad) {
+        if (aguaActual + cantidad <= aguaCapacidad) {
+            aguaActual += cantidad;
+            System.out.println("Se agregaron " + cantidad + " mililitros de agua.");
+        } else {
+            System.out.println("Capacidad de agua excedida. No se puede agregar más.");
+        }
+    }
+
+    //Método para mostrar la cantidad de ingredientes
+    public void mostrarIngredientes() {
+        System.out.println("Café: " + cafeActual + "g / " + cafeCapacidad + "g");
+        System.out.println("Azúcar: " + azucarActual + "g / " + azucarCapacidad + "g");
+        System.out.println("Agua: " + aguaActual + "g / " + aguaCapacidad + "g");
+    }
+
+    //Método para vaciar la cafetera
+    public void vaciarCafetera() {
+        cafeActual = 0;
+        aguaActual = 0;
+        azucarActual = 0;
+        System.out.println("Insumos vaciados.");
+        mostrarIngredientes();
+    }
+
+    //Método para mostrar reporte de ventas
+    public void mostrarReporte() {
+        System.out.println("Ventas totales: $" + ventasTotales);
+        System.out.println("Total tazas vendidas: " + tazasVendidas);
+        System.out.println("Tazas vendidas: ");
+        for (int i = 0; i < tazasVendidas.size(); i++) {
+            System.out.println((i + 1) + ". " + tazasVendidas.get(i));
+        }
+    }
+}

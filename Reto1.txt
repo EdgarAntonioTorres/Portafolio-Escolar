@@ -1,0 +1,121 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.reto1;
+
+/**
+ *
+ * @author edgar
+ */
+import java.io.*;
+import java.util.Scanner;
+public class Reto1 
+{
+    public static void main(String[] args) throws IOException
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("A. Cálculo de masa corporal (índice de masa corporal)");
+        System.out.println("B. Cálculo de masa corporal magra");
+        System.out.println("C. Cálculo de metabolismo basal (gasto energético basal)");
+        System.out.println("Inserte la opción a la que quiera acceder:");
+        char option = scanner.next().charAt(0);
+        option = Character.toUpperCase(option);
+        System.out.println(" ");
+        
+        switch(option)
+        {
+            case 'A':
+                System.out.println("Cálculo de masa corporal (índice de masa corporal).");
+                System.out.println("Introduzca su peso en kilos:");
+                double peso = scanner.nextDouble();
+                System.out.println("Introduzca su estatura en centímetros:");
+                double estatura = scanner.nextDouble();
+                double estaturametros = estatura/100;
+                double imc = (peso/(estaturametros*estaturametros));
+                System.out.println("Su IMC es: " + imc);
+                //Condicionales para interpretación de la condición del paciente
+                if(imc <= 18.49)
+                {
+                    System.out.println("Su condición es: Peso bajo");
+                }
+                else if (imc <= 24.99 && imc >= 18.5)
+                {
+                    System.out.println("Su condición es: Peso normal");
+                }
+                else if (imc <= 29.99 && imc >= 25)
+                {
+                    System.out.println("Su condición es: Sobrepeso");
+                }
+                else if (imc <= 34.99 && imc >= 30)
+                {
+                    System.out.println("Su condición es: Obesidad leve");
+                }
+                else if (imc <= 39.99 && imc >= 35)
+                {
+                    System.out.println("Su condición es: Obesidad media");
+                }
+                else 
+                {
+                    System.out.println("Su condición es: Obesidad mórbida");
+                }
+                break;
+            case 'B':
+                System.out.println("Cálculo de masa corporal magra.");
+                System.out.println("Introduzca su peso en kilos:");
+                double pesob = scanner.nextDouble();
+                System.out.println("Introduzca su estatura en centímetros:");
+                double estaturab = scanner.nextDouble();
+                System.out.println("Introduzca su sexo: Masculino (M) o Femenino (F)");
+                char sexo = scanner.next().charAt(0);
+                sexo = Character.toUpperCase(sexo);
+                //Condicionales cálculos dependiendo el sexo
+                switch (sexo) 
+                {
+                    case 'M':
+                        double masam = ((1.1*pesob)-128*((pesob*pesob)/(estaturab*estaturab)));
+                        System.out.println("Su masa corporal en kilos es: " + masam);
+                        break;
+                    case 'F':
+                        double masaf = ((1.07*pesob)-148*((pesob*pesob)/(estaturab*estaturab)));
+                        System.out.println("Su masa corporal en kilos es: " + masaf);
+                        break;
+                    default:
+                        System.out.println("ERROR");
+                        break;
+                }
+                break;
+            case 'C':
+                System.out.println("Cálculo de metabolismo basal (gasto energético basal).");
+                System.out.println("Introduzca su peso en kilos:");
+                double pesoc = scanner.nextDouble();
+                System.out.println("Introduzca su estatura en centímetros:");
+                double estaturac = scanner.nextDouble();
+                System.out.println("Introduzca su sexo: Masculino (M) o Femenino (F)");
+                char sexoc = scanner.next().charAt(0);
+                sexoc = Character.toUpperCase(sexoc);
+                System.out.println("Introduzca su edad:");
+                double edad = scanner.nextDouble();
+                //Condicionales cálculos dependiendo sexo
+                switch (sexoc)
+                {
+                    case 'M':
+                        double metam = (66.5+(13.75*pesoc)+(5.003*estaturac)-(6.775*edad));
+                        System.out.println("Su metabolismo basal es: " + metam);
+                        break;
+                    case 'F':
+                        double metaf = (665.1+(9.563*pesoc)+(1.85*estaturac)-(4.676*edad));
+                        System.out.println("Su metabolismo basal es: " + metaf);
+                        break;
+                    default:
+                        System.out.println("ERROR");
+                        break;
+                }
+                break;
+            default:
+                System.out.println("ERROR");
+                break;
+        }
+    }
+}

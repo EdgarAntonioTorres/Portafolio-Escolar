@@ -1,0 +1,39 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.io.*;
+import java.util.Scanner;
+public class Reto2 
+{
+    public static void main(String[] args) throws IOException 
+    {
+         Scanner scanner = new Scanner(System.in);
+         System.out.println("Ingrese la cantidad de calificaciones a capturar: ");
+         int numCalif = scanner.nextInt();
+         if (numCalif <= 0) 
+         {
+            System.out.println("El número debe ser mayor a 0. Intente de nuevo.");
+            return;
+         }
+         
+         double sumaCalif = 0;
+         for (int i = 1; i <= numCalif; i++)
+         {
+            System.out.println("Ingrese la calificación " + i + ": ");
+            double calificacion = scanner.nextDouble();
+            sumaCalif += calificacion;
+         }
+         
+         double promedio = sumaCalif / numCalif;
+         promedio = Math.round(promedio * 100.0)/100.0;
+         System.out.println("El promedio de las calificaciones es: " + promedio);
+    }   
+}

@@ -1,0 +1,114 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.Scanner;
+public class Reto3 
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        //Definir variables
+        String[] words = {"Efervescente", "Efímero", "Ímpetu", "Inefable", "Lúdico", "Nefelibata", "Oblicuo", "Paradoja", "Quimera", "Sosegado"};
+        String[] meanings = {"Que desprende burbujas, agitación o excitación.", "Que tiene corta duración, que dura poco tiempo.", "Fuerza, impulso o vigor con que se hace algo.", "Que no se puede expresar con palabras, algo tan extraordinario que va más allá de la descripción.", "Relacionado con el juego, la diversión o el entretenimiento.", "Persona que vive en las nubes, que tiene la cabeza en las nubes y es ajena a la realidad.", "Que no es recto ni perpendicular, que está inclinado o sesgado. También se utiliza para referirse a un enfoque indirecto o no frontal.", "Contraposición de dos ideas contrarias que, sin embargo, pueden ser ambas ciertas.", "Idea o proyecto irrealizable, utopía.", "Que está en calma, tranquilo, sereno."};
+        char option = 'O';
+        
+        do
+        {
+            showMenu();
+            option = sc.next().charAt(0);
+            option = Character.toUpperCase(option);
+            
+            //Opciones del menú
+            switch (option)
+            {
+                case 'A':
+                    listWords(words);
+                    break;
+                case 'B':
+                    searchWords(words, meanings);
+                    break;
+                case 'C':
+                    dictionaryDetails(words, meanings);
+                    break;
+                case 'S':
+                    System.out.println("Programa finalizado, cerrando diccionario...");
+                    break;
+                default:
+                    System.out.println("ERROR. Opción inválida, intente nuevamente");
+            }
+        } while (option != 'S');
+    }
+    //Función para mostrar el menú
+    private static void showMenu()
+    {
+        System.out.println("---Diccionario---");
+        System.out.println("Menú:");
+        System.out.println("A) Enlistar palabras del diccionario");
+        System.out.println("B) Buscar palabras en el diccionario");
+        System.out.println("C) Detalle del diccionario");
+        System.out.println("S) Finalizar programa");
+        System.out.println("Seleccione una opción:");
+    }
+    //Función para opción A
+    private static void listWords(String[] words)
+    {
+        System.out.println("Palabras del diccionario:");
+        for (String word : words)
+        {
+            System.out.println(word);
+        }
+    }
+    //Función para opción B
+    private static void searchWords(String[] words, String[] meanings)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Palabras del diccionario:");
+        for (String word : words)
+        {
+            System.out.println(word);
+        }
+        
+        System.out.println("Ingrese la palabra a buscar:");
+        String selectedWord = sc.nextLine();
+        int index = -1;
+        
+        for (int i = 0; i < words.length; i++)
+        {
+            if (words[i].equalsIgnoreCase(selectedWord))
+            {
+                index = i;
+                break;
+            }
+        }
+        
+        if (index != -1)
+        {
+            System.out.println("Significado de '" + words[index] + "': " + meanings[index]);
+        }
+        else
+        {
+            System.out.println("La palabra '" + selectedWord + "' no existe en el diccionario.");
+        }
+    }
+    //Función para opción C
+    private static void dictionaryDetails(String[] words, String[] meanings)
+    {
+        System.out.println("Detalles del diccionario:");
+        System.out.println("Cantidad de palabras: " + words.length);
+        
+        for (int i = 0; i < words.length; i++)
+        {
+            System.out.print((i + 1) + ". ");
+            System.out.println(words[i] + ", cantidad de caracteres: " + words[i].length() + " cantidad caracteres significado: " + meanings[i].length() + ".");
+        }
+    }
+}

@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ *
+ * @author edgar
+ */
+public class Reto8 {
+    private static ArrayList<Partida> historial = new ArrayList<>();
+    private static final int activacionesDiarias = 10;
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int juegosRealizados = 0;
+
+        while (juegosRealizados < activacionesDiarias) {
+            System.out.println("---- Menú de Juegos ----");
+            System.out.println("1. Adivina el Número");
+            System.out.println("2. Encuentra la Carita");
+            System.out.println("3. Gira una Carta");
+
+            System.out.println("Seleccione un juego (1-3): ");
+            int opcion = sc.nextInt();
+            sc.nextLine();
+            
+            System.out.println("Ingrese su nombre: ");
+            String nombre = sc.nextLine();
+            System.out.println("Ingrese su correo: ");
+            String correo = sc.nextLine();
+            System.out.println("Ingrese su teléfono: ");
+            String telefono = sc.nextLine();
+            System.out.println("Ingrese su fecha de nacimiento (DD/MM/YYYY): ");
+            String fechaNacimiento = sc.nextLine();
+
+            Partida partida;
+            switch (opcion) {
+                case 1:
+                    partida = new AdivinaNumero(nombre, correo, telefono, fechaNacimiento);
+                    break;
+                case 2:
+                    partida = new EncuentraCarita(nombre, correo, telefono, fechaNacimiento);
+                    break;
+                case 3:
+                    partida = new GiraUnaCarta(nombre, correo, telefono, fechaNacimiento);
+                    break;
+                default:
+                    System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                    continue;
+            }
+            
+            partida.jugar(); // Realizar la partida
+            partida.mostrarResultado(); // Mostrar el resultado de la partida
+            historial.add(partida); // Agregar esta partida al historial
+            juegosRealizados++; // Incrementar el contador de juegos realizados
+        }
+
+        // Reporte del Día
+        mostrarReporte();
+    }
+
+    public static void mostrarReporte() {
+        System.out.println("");
+        System.out.println("=== Reporte del Día ===");
+        for (Partida partida : historial) {
+            System.out.println("Nombre: " + partida.nombre);
+            System.out.println("Correo: " + partida.correo);
+            System.out.println("Teléfono: " + partida.telefono);
+            System.out.println("Fecha de Nacimiento: " + partida.fechaNacimiento);
+            System.out.println("Tipo de Juego: " + partida.getClass().getSimpleName());
+            System.out.println("Estado: " + (partida.ganada ? "Ganado" : "Perdido"));
+            System.out.println("=======================");
+        }
+    }
+}

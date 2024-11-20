@@ -1,0 +1,62 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+//Clase "Partida" (Superclase)
+import java.util.ArrayList;
+
+public class Partida {
+    protected String nombre;
+    protected String correo;
+    protected String telefono;
+    protected String fechaNacimiento;
+    protected boolean ganada;
+    protected static ArrayList<Partida> historial = new ArrayList<>();    
+
+    public Partida(String nombre, String correo, String telefono, String fechaNacimiento, boolean ganada) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.ganada = ganada;
+        
+    }
+    
+    public Partida(String nombre, String correo, String telefono, String fechaNacimiento) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    //Método para jugar
+    public void jugar() {}
+    
+    //Método para mostrar el resultado de la partida
+    public void mostrarResultado() {
+        if (ganada == true) {
+            System.out.println("¡Felicidades " + nombre + " eres un ganador!");
+        }
+        else {
+            System.out.println("Lo siento, " + nombre + ". Mejor suerte para la próxima.");
+        }
+        System.out.println("");
+    }
+
+    //Método para registrar la partida en el historial
+    public static void registrarPartida(Partida partida) {
+        historial.add(partida);
+    }   
+    
+    //Método para obtener el historial de todas las partidas   
+    public static ArrayList<Partida> getHistorial() {
+        return historial;
+    }
+}

@@ -1,0 +1,103 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.time.LocalDate;
+public class Empleado {
+    private String nombreCompleto;
+    private int horasTrabajadas;
+    private int horasExtrasTrabajadas;
+    private String telefono;
+    private LocalDate fechaNacimiento;
+    private CategoriaEmpleado categoria;
+
+    // Constructor
+    public Empleado(String nombreCompleto, int horasTrabajadas, int horasExtrasTrabajadas,
+                    String telefono, LocalDate fechaNacimiento, CategoriaEmpleado categoria) {
+        this.nombreCompleto = nombreCompleto;
+        this.horasTrabajadas = horasTrabajadas;
+        this.horasExtrasTrabajadas = horasExtrasTrabajadas;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.categoria = categoria;
+    }
+
+    public Empleado(String nombreCompleto, int horasTrabajadas, int horasExtrasTrabajadas, CategoriaEmpleado categoria) {
+        this.nombreCompleto = nombreCompleto;
+        this.horasTrabajadas = horasTrabajadas;
+        this.horasExtrasTrabajadas = horasExtrasTrabajadas;
+        this.categoria = categoria;
+    }   
+
+    // Getter y setters
+    
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public int getHorasTrabajadas() {
+        return horasTrabajadas;
+    }
+
+    public int getHorasExtrasTrabajadas() {
+        return horasExtrasTrabajadas;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public CategoriaEmpleado getCategoria() {
+        return categoria;
+    }
+    
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public void setHorasTrabajadas(int horasTrabajadas) {
+        this.horasTrabajadas = horasTrabajadas;
+    }
+
+    public void setHorasExtrasTrabajadas(int horasExtrasTrabajadas) {
+        this.horasExtrasTrabajadas = horasExtrasTrabajadas;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setCategoria(CategoriaEmpleado categoria) {
+        this.categoria = categoria;
+    }
+
+// Método para calcular edad
+    public int calcularEdad() {
+        int añoActual = LocalDate.now().getYear(); // Obtener el año actual
+        int añoNacimiento = fechaNacimiento.getYear(); //Obtener el año de nacimiento
+        int edad = añoActual - añoNacimiento; // Calcular la edad
+        return edad; 
+    }
+    
+        // Método para calcular el salario del empleado
+    public double calcularSalario() {
+        double salarioBase = categoria.getSueldoBase(); // Obtener el sueldo base de la categoría del empleado
+        double salarioExtra = categoria.getPagoPorHoraExtra() * horasExtrasTrabajadas; // Calcular el salario extra
+        return salarioBase + salarioExtra; // Calcular el salario total sumando el sueldo base y el salario extra
+    }
+}

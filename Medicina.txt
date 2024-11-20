@@ -1,0 +1,88 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+public class Medicina {
+
+    public String nombreQuimico;
+    public String nombreGenerico;
+    public String nombreRegistrado;
+    public float precioPublico;
+    public double precioVenta;
+    public int formaFarmaceutica;
+
+    /*
+    formaFarmaceutica
+    Si selecciona 1, sólida
+    Si selecciona 2, semisólida
+    Si seleccione 3, líquidas
+     */
+ /*Constructor*/
+    public Medicina() {
+
+    }
+
+    public Medicina(String nombreQuimico, String nombreGenerico, String nombreRegistrado, float precioPublico, double precioVenta, int formaFarmaceutica) {
+        this.nombreQuimico = nombreQuimico;
+        this.nombreGenerico = nombreGenerico;
+        this.nombreRegistrado = nombreRegistrado;
+        this.precioPublico = precioPublico;
+        this.precioVenta = precioVenta;
+        this.formaFarmaceutica = formaFarmaceutica;
+    }
+
+    public String getNombreQuimico() {
+        return nombreQuimico;
+    }
+
+    public String getNombreGenerico() {
+        return nombreGenerico;
+    }
+
+    public String getNombreRegistrado() {
+        return nombreRegistrado;
+    }
+
+    public float getPrecioPublico() {
+        return precioPublico;
+    }
+
+    public double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public int getFormaFarmaceutica() {
+        return formaFarmaceutica;
+    }
+
+    public void setNombreQuimico(String nombreQuimico) {
+        this.nombreQuimico = nombreQuimico;
+    }
+
+    public void setNombreGenerico(String nombreGenerico) {
+        this.nombreGenerico = nombreGenerico;
+    }
+
+    public void setNombreRegistrado(String nombreRegistrado) {
+        this.nombreRegistrado = nombreRegistrado;
+    }
+
+    public void setPrecioPublico(float precioPublico) {
+        this.precioPublico = precioPublico;
+    }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+
+    public void setFormaFarmaceutica(int formaFarmaceutica) {
+        this.formaFarmaceutica = formaFarmaceutica;
+    }
+}

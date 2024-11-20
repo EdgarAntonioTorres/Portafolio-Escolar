@@ -1,0 +1,54 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class EncuentraCarita extends Partida {
+    
+    public EncuentraCarita(String nombre, String correo, String telefono, String fechaNacimiento) {
+        super(nombre, correo, telefono, fechaNacimiento);
+    }
+    
+    private static ArrayList<EncuentraCarita> historial = new ArrayList<>();
+    private char[][] tabla = {
+            {'X', 'X', 'X'},
+            {'X', '☺', 'X'},
+            {'X', 'X', 'X'}
+    };
+    
+    @Override
+    public void jugar(){
+        System.out.println("");
+        System.out.println("Bienvenido a: Encuentra la Carita");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Intente encontrar la carita ☺");
+        System.out.println("Ingrese fila (1-3): ");
+        int fila = sc.nextInt() - 1;
+        sc.nextLine();
+        System.out.println("Ingrese columna (1-3): ");
+        int columna = sc.nextInt() - 1;
+        sc.nextLine();
+        // Imprimir la tabla
+        for (int i = 0; i < tabla.length; i++) {
+            for (int j = 0; j < tabla[i].length; j++) {
+                System.out.print(tabla[i][j] + " ");
+            }
+            System.out.println(); // Nueva línea para separar filas
+        }
+        
+        System.out.println("");
+        if (tabla[fila][columna] == '☺') {
+            ganada = true;
+        }
+        registrarPartida(this);
+    }
+}

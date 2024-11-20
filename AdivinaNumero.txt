@@ -1,0 +1,48 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+public class AdivinaNumero extends Partida {
+    public AdivinaNumero(String nombre, String correo, String telefono, String fechaNacimiento) {
+        super(nombre, correo, telefono, fechaNacimiento);
+    }
+    
+    //Variables
+    private static ArrayList<AdivinaNumero> historial = new ArrayList<>();
+    private int numeroSecreto;
+    private int numeroSeleccionado;
+    
+    @Override
+    public void jugar(){
+        int intento = 3;
+        System.out.println("");
+        System.out.println("Bienvenido a: Adivine el Número");
+        Random rand = new Random();
+        Scanner sc = new Scanner(System.in);
+        numeroSecreto = rand.nextInt(10) + 1;
+        System.out.println("Se ha generado un número aleatorio del 1 al 10");
+        do {
+                System.out.println("Adivine el número a continuación, le quedan " + intento + " intentos.");
+                numeroSeleccionado = sc.nextInt();
+                sc.nextLine();
+                intento--;
+        } while (intento != 0 && numeroSeleccionado != numeroSecreto);
+        
+        System.out.println("El número secreto era: " + numeroSecreto);
+        if (numeroSeleccionado == numeroSecreto){
+            ganada = true;
+        }
+        registrarPartida(this);
+    }
+}

@@ -1,0 +1,131 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Reto4
+{
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<VentaBoleto> listaVentas = new ArrayList<>();
+
+        char opcion;
+        do {
+            System.out.println("--- Sistema de registro de ventas ---");
+            System.out.println("Menú:");
+            System.out.println(" A. Realizar venta de boleto");
+            System.out.println(" B. Mostrar datos de la lista de ventas");
+            System.out.println(" S. Finalizar programa");
+            System.out.println("Seleccione una opción: ");
+            opcion = scanner.next().charAt(0);
+            opcion = Character.toUpperCase(opcion);
+
+            switch (opcion) {
+                case 'A':
+                    realizarVenta(listaVentas);
+                    break;
+                case 'B':
+                    mostrarDatos(listaVentas);
+                    break;
+                case 'S':
+                    System.out.println("----- Fin del programa v 1.1 -----");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+
+        } while (opcion != 'S' && opcion != 's');
+
+        scanner.close();
+    }
+
+    private static void realizarVenta(ArrayList<VentaBoleto> listaVentas) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingrese el nombre completo del comprador: ");
+        String nombreComprador = scanner.nextLine();
+
+        System.out.println("Ingrese cantidad de pasajeros adicionales: ");
+        int cantidadBoletosAdicionales = scanner.nextInt();
+        int cantidadBoletos = cantidadBoletosAdicionales + 1;
+
+        ArrayList<String> listaPasajeros = new ArrayList<>();
+        scanner.nextLine();
+        for (int i = 0; i < cantidadBoletosAdicionales; i++) {
+            System.out.println("Ingrese el nombre completo del pasajero " + (i + 1) + ": ");
+            listaPasajeros.add(scanner.nextLine());
+        }
+
+        double importeTotal = cantidadBoletos * 1250.50;
+
+        listaVentas.add(new VentaBoleto(nombreComprador, cantidadBoletos, listaPasajeros, importeTotal));
+
+        System.out.println("----- Ticket de venta -----");
+        System.out.println("Nombre del comprador: " + nombreComprador);
+        System.out.println("Cantidad de boletos: " + cantidadBoletos);
+        System.out.println("Importe total: $" + importeTotal);
+        System.out.println(" ");
+    }
+
+    private static void mostrarDatos(ArrayList<VentaBoleto> listaVentas) {
+        System.out.println("Lista de pasajeros registrados:");
+        for (VentaBoleto venta : listaVentas) {
+            System.out.println("Nombre del comprador: " + venta.getNombreComprador());
+            System.out.println("Cantidad de boletos: " + venta.getCantidadBoletos());
+            System.out.println("Pasajeros adicionales:");
+            for (String pasajero : venta.getListaPasajeros()) {
+                System.out.println("- " + pasajero);
+            }
+            System.out.println("Importe total: $" + venta.getImporteTotal());
+            System.out.println("-------------------------");
+        }
+
+        int totalBoletos = listaVentas.stream().mapToInt(VentaBoleto::getCantidadBoletos).sum();
+        double totalImporte = listaVentas.stream().mapToDouble(VentaBoleto::getImporteTotal).sum();
+        int totalPasajeros = listaVentas.stream().mapToInt(v -> v.getListaPasajeros().size() + 1).sum();
+
+        System.out.println("Total de boletos vendidos: " + totalBoletos);
+        System.out.println("Importe total de ventas: $" + totalImporte);
+        System.out.println("Total de pasajeros registrados: " + totalPasajeros);
+        System.out.println(" ");
+    }
+}
+
+class VentaBoleto {
+    private String nombreComprador;
+    private int cantidadBoletos;
+    private ArrayList<String> listaPasajeros;
+    private double importeTotal;
+
+    public VentaBoleto(String nombreComprador, int cantidadBoletos, ArrayList<String> listaPasajeros, double importeTotal) {
+        this.nombreComprador = nombreComprador;
+        this.cantidadBoletos = cantidadBoletos;
+        this.listaPasajeros = listaPasajeros;
+        this.importeTotal = importeTotal;
+    }
+
+    public String getNombreComprador() {
+        return nombreComprador;
+    }
+
+    public int getCantidadBoletos() {
+        return cantidadBoletos;
+    }
+
+    public ArrayList<String> getListaPasajeros() {
+        return listaPasajeros;
+    }
+
+    public double getImporteTotal() {
+        return importeTotal;
+    }
+}

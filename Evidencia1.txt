@@ -1,0 +1,133 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Evidencia1 {
+
+    private static ArrayList<Medicina> listaMedicamentos = new ArrayList<>();
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        //Declaración de variables
+        int opcion;
+        String usuarioCorrecto = "usuario";
+        String contraseñaCorrecta = "contraseña";
+
+        //Inicio de sesión como medida de seguridad
+        System.out.println("Bienvenido al sistema de control de datos de los productos.");
+        boolean credencialesCorrectas = false;
+        while (credencialesCorrectas == false) {
+            System.out.println("");
+            System.out.println("Ingrese el usuario: ");
+            String usuario = sc.nextLine();
+            System.out.println("Ingrese la contraseña: ");
+            String contraseña = sc.nextLine();
+            System.out.println("");
+
+            credencialesCorrectas = usuario.equals(usuarioCorrecto) && contraseña.equals(contraseñaCorrecta);
+            if (credencialesCorrectas == false) {
+                System.out.println("Usuario o contraseña incorrectas");
+            }
+        }
+
+    do {
+            // Mostrar el menú
+            System.out.println("Menú:");
+            System.out.println("1. Ingresar datos de un medicamento");
+            System.out.println("2. Salir del programa");
+            System.out.println("Seleccione una opción: ");
+
+            // Leer la opción seleccionada por el usuario
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            // Realizar la acción correspondiente a la opción seleccionada
+            switch (opcion) {
+                case 1:
+                    ingresarDatosMedicamento(sc);
+                    break;
+                case 2:
+                    System.out.println("Saliendo del programa...");
+                    break;
+                default:
+                    System.out.println("ERROR. Opción inválida. Por favor, seleccione una opción válida.");
+                    break;
+            }
+            
+            for (Medicina medicamento : listaMedicamentos) {
+                System.out.println("");
+                System.out.println("Nombre Químico: " + medicamento.getNombreQuimico());
+                System.out.println("Nombre Genérico: " + medicamento.getNombreGenerico());
+                System.out.println("Nombre Registrado: " + medicamento.getNombreRegistrado());
+                System.out.println("Precio Público: " + medicamento.getPrecioPublico());
+                System.out.println("Precio de Venta: " + medicamento.getPrecioVenta());
+                System.out.println("Forma Farmacéutica: " + medicamento.getFormaFarmaceutica());
+                System.out.println();
+            }
+        } while (opcion != 2);
+    }
+    
+    //Método solicitar datos
+    private static void ingresarDatosMedicamento(Scanner sc) {
+        // Solicitar al usuario que ingrese los datos del medicamento
+        System.out.println("");
+        System.out.println("Ingrese el nombre químico del medicamento:");
+        String nombreQuimico = sc.nextLine();
+
+        System.out.println("Ingrese el nombre genérico del medicamento:");
+        String nombreGenerico = sc.nextLine();
+
+        System.out.println("Ingrese el nombre registrado del medicamento:");
+        String nombreRegistrado = sc.nextLine();
+
+        System.out.println("Ingrese el precio público del medicamento:");
+        float precioPublico = sc.nextFloat();
+
+        System.out.println("Seleccione la forma farmacéutica del medicamento:");
+        System.out.println("1. Sólida");
+        System.out.println("2. Semisólida");
+        System.out.println("3. Líquida");
+        int formaFarmaceutica = sc.nextInt();
+        
+        float porcentajeAdicional = 0; // Inicializar el porcentaje adicional
+
+        // Determinar el porcentaje adicional según el tipo de forma farmacéutica
+        switch (formaFarmaceutica) {
+            case 1: // Sólida
+                porcentajeAdicional = 0.09f; // 9%
+                break;
+            case 2: // Semisólida
+                porcentajeAdicional = 0.12f; // 12%
+                break;
+            case 3: // Líquida
+            porcentajeAdicional = 0.13f; // 13%
+                break;
+            default:
+                System.out.println("Opción inválida. No se aplicará porcentaje adicional al precio de venta.");
+                break;
+        }
+
+        // Calcular el precio de venta con el porcentaje adicional
+        double precioVentaDouble = precioPublico * (1 + porcentajeAdicional);
+
+        // Redondear el precio de venta a dos decimales
+        double precioVenta = Math.round(precioVentaDouble * 100.0) / 100.0;
+
+        // Crear un objeto Medicamento con los datos ingresados por el usuario
+        Medicina medicamento = new Medicina(nombreQuimico, nombreGenerico, nombreRegistrado, precioPublico, precioVenta, formaFarmaceutica);
+
+        //Agregar medicina a lista de medicamentos
+        listaMedicamentos.add(medicamento);
+    }
+}

@@ -1,0 +1,60 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+public class CategoriaEmpleado {
+    
+    private String nombreCategoria;
+    private String claveCategoria;
+    private double sueldoBase;
+    private double pagoPorHoraExtra;
+
+    // Constructor
+    public CategoriaEmpleado(String nombreCategoria, String claveCategoria, double sueldoBase, double pagoPorHoraExtra) {
+        this.nombreCategoria = nombreCategoria;
+        this.claveCategoria = claveCategoria;
+        this.sueldoBase = sueldoBase;
+        this.pagoPorHoraExtra = pagoPorHoraExtra;
+    }
+    
+    // Setters y getters
+
+    public void setNombreCategoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
+    }
+
+    public void setClaveCategoria(String claveCategoria) {
+        this.claveCategoria = claveCategoria;
+    }
+
+    public void setSueldoBase(double sueldoBase) {
+        this.sueldoBase = sueldoBase;
+    }
+
+    public void setPagoPorHoraExtra(double pagoPorHoraExtra) {
+        this.pagoPorHoraExtra = pagoPorHoraExtra;
+    }
+
+    public String getNombreCategoria() {
+        return nombreCategoria;
+    }
+
+    public String getClaveCategoria() {
+        return claveCategoria;
+    }
+
+    public double getSueldoBase() {
+        return sueldoBase;
+    }
+
+    public double getPagoPorHoraExtra() {
+        return pagoPorHoraExtra;
+    }
+}

@@ -1,0 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class GiraUnaCarta extends Partida{
+    
+    public GiraUnaCarta(String nombre, String correo, String telefono, String fechaNacimiento) {
+        super(nombre, correo, telefono, fechaNacimiento);
+    }
+    
+    private static ArrayList<GiraUnaCarta> historial = new ArrayList<>();
+    private char[] cartas = {'X', 'X', 'X', 'X', '♦'};
+
+    @Override
+    public void jugar() {
+        System.out.println("");
+        System.out.println("Bienvenido a: Gira una Carta");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Intente encontrar el símbolo de diamante ♦");
+        System.out.println("Ingrese posición (1-5): ");
+        int posicion = sc.nextInt() - 1;
+        sc.nextLine();
+        // Imprimir las cartas
+        for (int i = 0; i < cartas.length; i++) {
+            System.out.print(cartas[i] + " ");
+        }
+        
+        System.out.println("");
+        if (cartas[posicion] == '♦') {
+            ganada = true;
+        }
+        registrarPartida(this);
+    }
+}

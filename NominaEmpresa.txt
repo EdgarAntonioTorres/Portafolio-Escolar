@@ -1,0 +1,88 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tecmilenio.retos;
+
+/**
+ *
+ * @author edgar
+ */
+import java.util.ArrayList;
+public class NominaEmpresa {
+    private ArrayList<Empleado> empleados;
+
+    // Constructor
+    public NominaEmpresa() {
+        empleados = new ArrayList<>();
+    }
+    
+    // Método para agregar un empleado a la lista
+    public void agregarEmpleado(Empleado empleado) {
+        empleados.add(empleado);
+    }
+    
+    // Método para calcular el total de la nómina de la empresa
+    public double calcularTotalNomina() {
+        double totalNomina = 0;
+        for (Empleado empleado : empleados) {
+            totalNomina += empleado.calcularSalario();
+        }
+        return totalNomina;
+    }
+    
+    // Método para calcular el total a pagar por sueldo normal
+    public double calcularTotalSueldoNormal() {
+        double totalSueldoNormal = 0;
+        for (Empleado empleado : empleados) {
+            totalSueldoNormal += empleado.getCategoria().getSueldoBase() * empleado.getHorasTrabajadas();
+        }
+        return totalSueldoNormal;
+    }
+    
+    // Método para calcular el total a pagar por horas extras
+    public double calcularTotalHorasExtras() {
+        double totalHorasExtras = 0;
+        for (Empleado empleado : empleados) {
+            totalHorasExtras += empleado.getCategoria().getPagoPorHoraExtra() * empleado.getHorasExtrasTrabajadas();
+        }
+        return totalHorasExtras;
+    }
+    
+    // Método para calcular el total de horas laboradas en la empresa
+    public int calcularTotalHorasLaboradas() {
+        int totalHorasLaboradas = 0;
+        for (Empleado empleado : empleados) {
+            totalHorasLaboradas += empleado.getHorasTrabajadas() + empleado.getHorasExtrasTrabajadas();
+        }
+        return totalHorasLaboradas;
+    }
+    
+    // Método para contar empleados que tienen horas extras
+    public int contarEmpleadosConHorasExtras() {
+        int contador = 0;
+        for (Empleado empleado : empleados) {
+            if (empleado.getHorasExtrasTrabajadas() > 0) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    
+    // Método para contar empleados que no tienen horas extras
+    public int contarEmpleadosSinHorasExtras() {
+        int contador = 0;
+        for (Empleado empleado : empleados) {
+            if (empleado.getHorasExtrasTrabajadas() == 0) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    
+    // Método para obtener la lista de empleados
+    public ArrayList<Empleado> getEmpleados() {
+        return empleados;
+    }
+}
